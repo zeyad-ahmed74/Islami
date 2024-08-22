@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:islami/ui/quran/ChapterDetailsScreen.dart';
-import 'package:islami/ui/quran/ChapterTitle.dart';
+import 'package:islami/ui/quran/ChapterTitleWidget.dart';
 import 'package:islami/ui/theme/MyThemeData.dart';
 import 'package:islami/ui/utils/ChaptersNameAndVersesNumber.dart';
 import 'package:islami/ui/utils/HelpMethod.dart';
@@ -68,9 +67,13 @@ class QuranScreen extends StatelessWidget {
                     ),
                     Expanded(
                       child: ListView.separated(
-                          itemBuilder: (context, index) => ChapterTitle(
-                              ChaptersNameAndVersesNumber.chaptersName[index],
-                              ChaptersNameAndVersesNumber.versesNumber[index]),
+                          itemBuilder: (context, index) => ChapterTitleWidget(
+                                index: index,
+                                name: ChaptersNameAndVersesNumber
+                                    .chaptersName[index],
+                                numOfAyat: ChaptersNameAndVersesNumber
+                                    .versesNumber[index],
+                              ),
                           separatorBuilder: (context, index) {
                             return Divider(
                               color: dividerColor,
