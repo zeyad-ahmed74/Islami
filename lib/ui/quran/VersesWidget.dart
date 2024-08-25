@@ -14,7 +14,7 @@ class VersesWidget extends StatelessWidget {
           child: Text(
             "$verse{$numOfVerse}",
             style: TextStyle(
-              fontSize: 25.0,
+              fontSize: .0,
             ),
             locale: Locale("ar"),
             textDirection: TextDirection.rtl,
