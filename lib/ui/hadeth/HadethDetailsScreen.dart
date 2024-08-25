@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:islami/ui/hadeth/HadethScreen.dart';
 import 'package:islami/ui/theme/MyThemeData.dart';
-import 'package:islami/ui/utils/Ahadeth.dart';
 import 'package:islami/ui/utils/DefaultScreen.dart';
 
 class HadethDetailsScreen extends StatelessWidget {
@@ -74,8 +73,9 @@ class HadethDetailsScreen extends StatelessWidget {
                               scrollDirection: Axis.vertical,
                               child: Text(
                                 hadeth.body,
+                                textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 24.0,
+                                  fontSize: 20.0,
                                 ),
                               ),
                             ),
@@ -92,10 +92,4 @@ class HadethDetailsScreen extends StatelessWidget {
     return brightness == Brightness.dark;
   }
 
-  String getHadethBody(String hadethName) {
-    var indexOfHadeth = Ahadeth.hadethName.indexOf(hadethName ?? "0");
-    var hadethBody = Ahadeth.ahadeth[indexOfHadeth];
-
-    return hadethBody;
-  }
 }
