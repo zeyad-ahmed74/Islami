@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:islami/ui/hadeth/HadethDetailsScreen.dart';
+import 'package:flutter/services.dart';
+import 'package:islami/ui/hadeth/HadethTilteWidget.dart';
 import 'package:islami/ui/theme/MyThemeData.dart';
-import 'package:islami/ui/utils/Ahadeth.dart';
 import 'package:islami/ui/utils/HelpMethod.dart';
 
-class HadethScreen extends StatelessWidget {
+class HadethScreen extends StatefulWidget {
   static const String routeName = "hadethScreen";
-  List<String> ahadethNames = [];
 
-  HadethScreen() {
-    for (int i = 0; i < 2605; i++) {
-      ahadethNames.add("الحديث رقم ${i + 1}");
-    }
+  @override
+  State<HadethScreen> createState() => _HadethScreenState();
+}
+
+class _HadethScreenState extends State<HadethScreen> {
+  List<Hadeth> Ahadeth = [];
+
+  @override
+  void initState() {
+    super.initState();
+    readAhadethHeaders();
   }
-
   @override
   Widget build(BuildContext context) {
     Color dividerColor;
@@ -22,6 +27,7 @@ class HadethScreen extends StatelessWidget {
     } else {
       dividerColor = MyThemeData.lightPrimaryColor;
     }
+
     return Scaffold(
         body: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -45,39 +51,26 @@ class HadethScreen extends StatelessWidget {
           color: dividerColor,
         ),
         Expanded(
-            child: ListView.separated(
-          itemBuilder: (context, index) {
-            return HadethWidget(context, Ahadeth.hadethName[index], index);
-          },
-          separatorBuilder: (context, index) {
-            return Divider(
-              color: dividerColor,
-              thickness: 2.0,
-            );
-          },
-          itemCount: Ahadeth.hadethName.length,
-        ))
-      ],
-    ));
-  }
-
-  Widget HadethWidget(BuildContext context, String name, int index) {
-    return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, HadethDetailsScreen.routeName,
-            arguments: name);
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            name,
-            style: TextStyle(
-              fontSize: 32.0,
-            ),
-          ),
-        ],
-      ),
+            child: Ahadeth.isNotEmpty
+                ? ListView.separated(
+                    itemBuilder: (context, index) {
+                      return HadethTilteWidget(
+                          title: Ahadeth[index].title,
+                          body: Ahadeth[index].body);
+                    },
+                    separatorBuilder: (context, index) {
+                      return Divider(
+                        color: dividerColor,
+                        thickness: 2.0,
+                      );
+                    },
+                    itemCount: Ahadeth.length,
+                  )
+                : Center(
+                    child: CircularProgressIndicator(),
+                  ))
+          ],
+        )
     );
   }
 
@@ -85,4 +78,29 @@ class HadethScreen extends StatelessWidget {
     var brightness = MediaQuery.of(context).platformBrightness;
     return brightness == Brightness.dark;
   }
+
+  void readAhadethHeaders() async {
+    String fileContent =
+        await rootBundle.loadString("assets/files/ahadeth.txt");
+    List<String> ahadeth = fileContent.split('#');
+    for (int i = 0; i < ahadeth.length; i++) {
+      String singleHadeth = ahadeth[i];
+      List<String> lines = singleHadeth.trim().split("\n");
+      String title = lines[0];
+      lines.removeAt(0);
+      String hadethContent = lines.join("\n");
+      Hadeth hadeth = Hadeth(title: title, body: hadethContent);
+      Ahadeth.add(hadeth);
+      print(hadethContent);
+    }
+
+    setState(() {});
+  }
+}
+
+class Hadeth {
+  String title;
+  String body;
+
+  Hadeth({required this.title, required this.body});
 }

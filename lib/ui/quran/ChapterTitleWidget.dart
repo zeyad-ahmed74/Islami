@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:islami/ui/quran/ChapterDetailsScreen.dart';
 
-class ChapterTitle extends StatelessWidget {
-  String title;
+class ChapterTitleWidget extends StatelessWidget {
+  int index;
+  String name;
   int numOfAyat;
 
-  ChapterTitle(this.title, this.numOfAyat);
+  ChapterTitleWidget(
+      {required this.index, required this.name, required this.numOfAyat});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, ChapterDetailsScreen.routeName,
-            arguments: ChapterDetailsArgs(title: title, numOfAyat: numOfAyat));
+            arguments: ChapterDetailsArgs(index: index, name: name));
       },
       child: Row(
         children: [
@@ -26,7 +28,7 @@ class ChapterTitle extends StatelessWidget {
           )),
           Expanded(
               child: Text(
-            title,
+            name,
             style: TextStyle(
               fontSize: 25.0,
             ),
