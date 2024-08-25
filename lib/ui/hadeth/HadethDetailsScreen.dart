@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islami/ui/hadeth/HadethScreen.dart';
 import 'package:islami/ui/theme/MyThemeData.dart';
 import 'package:islami/ui/utils/Ahadeth.dart';
 import 'package:islami/ui/utils/DefaultScreen.dart';
@@ -25,15 +26,13 @@ class HadethDetailsScreen extends StatelessWidget {
       background = Colors.white;
     }
 
-    var hadethName = ModalRoute.of(context)?.settings.arguments as String;
-
-    var hadethBody = getHadethBody(hadethName);
+    var hadeth = ModalRoute.of(context)?.settings.arguments as Hadeth;
 
     return DefaultScreen(
         body: Scaffold(
             appBar: AppBar(
               title: Text(
-                hadethName ?? "الحديث",
+                hadeth.title ?? "الحديث",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 28.0,
@@ -55,7 +54,7 @@ class HadethDetailsScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          hadethName ?? "الحديث",
+                          hadeth.title ?? "الحديث",
                           style: TextStyle(
                               fontSize: 32.0, color: buttonsAndTextsColor),
                         ),
@@ -74,7 +73,7 @@ class HadethDetailsScreen extends StatelessWidget {
                             child: SingleChildScrollView(
                               scrollDirection: Axis.vertical,
                               child: Text(
-                                hadethBody,
+                                hadeth.body,
                                 style: TextStyle(
                                   fontSize: 24.0,
                                 ),

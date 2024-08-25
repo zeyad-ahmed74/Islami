@@ -108,7 +108,7 @@ class _ChapterDetailsScreenState extends State<ChapterDetailsScreen> {
                                   },
                                   itemCount: verses.length)
                               : Center(child: CircularProgressIndicator()),
-                        )
+                        ),
                       ],
                     )),
               ),
