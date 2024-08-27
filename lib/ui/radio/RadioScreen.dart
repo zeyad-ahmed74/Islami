@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:islami/ui/utils/DefaultScreen.dart';
 import 'package:islami/ui/utils/HelpMethod.dart';
 
 class RadioScreen extends StatelessWidget {
@@ -22,8 +21,7 @@ class RadioScreen extends StatelessWidget {
         ),
         Text(
           "إذاعة القرآن الكريم",
-          style: TextStyle(
-              fontSize: 25.0, color: Colors.black, fontWeight: FontWeight.w600),
+          style: Theme.of(context).textTheme.titleSmall,
         ),
         SizedBox(
           height: 60.0,
