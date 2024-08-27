@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:islami/ui/quran/ChapterTitleWidget.dart';
-import 'package:islami/ui/theme/MyThemeData.dart';
 import 'package:islami/ui/utils/ChaptersNameAndVersesNumber.dart';
 import 'package:islami/ui/utils/HelpMethod.dart';
 
@@ -11,12 +10,6 @@ class QuranScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color dividerColor;
-    if (checkIfLiteORDark(context)) {
-      dividerColor = MyThemeData.darkPrimaryColor;
-    } else {
-      dividerColor = MyThemeData.lightPrimaryColor;
-    }
 
     return Scaffold(
       body: Expanded(
@@ -28,17 +21,17 @@ class QuranScreen extends StatelessWidget {
             ),
             Expanded(
               child: Stack(children: [
-                Center(
-                  child: Container(
-                    width: 2.0,
-                    height: double.maxFinite,
-                    color: dividerColor,
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Center(
+                    child: VerticalDivider(
+                      thickness: 2.0,
+                    ),
                   ),
                 ),
                 Column(
                   children: [
                     Divider(
-                      color: dividerColor,
                       thickness: 2.0,
                     ),
                     Row(
@@ -46,23 +39,20 @@ class QuranScreen extends StatelessWidget {
                         Expanded(
                           child: Text(
                             "Ayat",
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 24.0),
+                            style: Theme.of(context).textTheme.titleSmall,
                             textAlign: TextAlign.center,
                           ),
                         ),
                         Expanded(
                           child: Text(
                             "Chapter Name",
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 24.0),
+                            style: Theme.of(context).textTheme.titleSmall,
                             textAlign: TextAlign.center,
                           ),
                         ),
                       ],
                     ),
                     Divider(
-                      color: dividerColor,
                       thickness: 2.0,
                     ),
                     Expanded(
@@ -76,7 +66,6 @@ class QuranScreen extends StatelessWidget {
                               ),
                           separatorBuilder: (context, index) {
                             return Divider(
-                              color: dividerColor,
                               thickness: 2.0,
                             );
                           },
@@ -93,8 +82,4 @@ class QuranScreen extends StatelessWidget {
     );
   }
 
-  bool checkIfLiteORDark(BuildContext context) {
-    var brightness = MediaQuery.of(context).platformBrightness;
-    return brightness == Brightness.dark;
-  }
 }

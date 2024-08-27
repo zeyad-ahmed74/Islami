@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami/ui/hadeth/HadethTilteWidget.dart';
-import 'package:islami/ui/theme/MyThemeData.dart';
 import 'package:islami/ui/utils/HelpMethod.dart';
 
 class HadethScreen extends StatefulWidget {
@@ -21,12 +20,6 @@ class _HadethScreenState extends State<HadethScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    Color dividerColor;
-    if (checkIfLiteORDark(context)) {
-      dividerColor = MyThemeData.darkPrimaryColor;
-    } else {
-      dividerColor = MyThemeData.lightPrimaryColor;
-    }
 
     return Scaffold(
         body: Column(
@@ -36,19 +29,18 @@ class _HadethScreenState extends State<HadethScreen> {
           getFullImagePath("hadith_header.png"),
           fit: BoxFit.fitWidth,
         ),
-        Container(
-          width: double.maxFinite,
-          height: 2.0,
-          color: dividerColor,
+        Divider(
+          thickness: 2.0,
         ),
-        Text(
-          "الأحاديث",
-          style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.w600),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            "الأحاديث",
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
         ),
-        Container(
-          width: double.maxFinite,
-          height: 2.0,
-          color: dividerColor,
+        Divider(
+          thickness: 2.0,
         ),
         Expanded(
             child: Ahadeth.isNotEmpty
@@ -60,7 +52,6 @@ class _HadethScreenState extends State<HadethScreen> {
                     },
                     separatorBuilder: (context, index) {
                       return Divider(
-                        color: dividerColor,
                         thickness: 2.0,
                       );
                     },
@@ -74,10 +65,6 @@ class _HadethScreenState extends State<HadethScreen> {
     );
   }
 
-  bool checkIfLiteORDark(BuildContext context) {
-    var brightness = MediaQuery.of(context).platformBrightness;
-    return brightness == Brightness.dark;
-  }
 
   void readAhadethHeaders() async {
     String fileContent =

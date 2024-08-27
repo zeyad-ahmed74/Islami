@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islami/ui/theme/MyThemeData.dart';
 
 import 'HelpMethod.dart';
 
@@ -14,7 +15,9 @@ class DefaultScreen extends StatelessWidget {
     return Stack(
       children: [
         Image.asset(
-          getFullImagePath("background.png"),
+          MyThemeData.isDark == false
+              ? getFullImagePath("light_main_bg.png")
+              : getFullImagePath("dark_main_bg.png"),
           fit: BoxFit.fill,
           width: double.maxFinite,
           height: double.maxFinite,

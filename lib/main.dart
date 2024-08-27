@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       title: "Islami",
       theme: MyThemeData.lightTheme,
       darkTheme: MyThemeData.darkTheme,
+      themeMode: ThemeMode.system,
       routes: {
         SplashScreen.routeName: (_) => SplashScreen(),
         HomeScreen.routeName: (_) => HomeScreen(),
