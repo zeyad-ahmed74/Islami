@@ -10,6 +10,8 @@ class QuranScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Locale currentLocal = Localizations.localeOf(context);
+    print(currentLocal);
 
     return Scaffold(
       body: Expanded(
@@ -56,22 +58,38 @@ class QuranScreen extends StatelessWidget {
                       thickness: 2.0,
                     ),
                     Expanded(
-                      child: ListView.separated(
-                          itemBuilder: (context, index) => ChapterTitleWidget(
-                                index: index,
-                                name: ChaptersNameAndVersesNumber
-                                    .chaptersName[index],
-                                numOfAyat: ChaptersNameAndVersesNumber
-                                    .versesNumber[index],
-                              ),
-                          separatorBuilder: (context, index) {
+                        child: currentLocal.toString() == "en"
+                            ? ListView.separated(
+                                itemBuilder: (context, index) => ChapterTitleWidget(
+                                      index: index,
+                                      name: ChaptersNameAndVersesNumber
+                                          .chaptersNameInEnglish[index],
+                                      numOfAyat: ChaptersNameAndVersesNumber
+                                          .versesNumber[index],
+                                    ),
+                                separatorBuilder: (context, index) {
                             return Divider(
                               thickness: 2.0,
                             );
                           },
-                          itemCount:
-                              ChaptersNameAndVersesNumber.chaptersName.length),
-                    ),
+                          itemCount: ChaptersNameAndVersesNumber
+                                    .chaptersNameInEnglish.length)
+                            : ListView.separated(
+                                itemBuilder: (context, index) =>
+                                    ChapterTitleWidget(
+                                      index: index,
+                                      name: ChaptersNameAndVersesNumber
+                                          .chaptersNameInArabic[index],
+                                      numOfAyat: ChaptersNameAndVersesNumber
+                                          .versesNumber[index],
+                                    ),
+                                separatorBuilder: (context, index) {
+                                  return Divider(
+                                    thickness: 2.0,
+                                  );
+                                },
+                                itemCount: ChaptersNameAndVersesNumber
+                                    .chaptersNameInArabic.length)),
                   ],
                 ),
               ]),
