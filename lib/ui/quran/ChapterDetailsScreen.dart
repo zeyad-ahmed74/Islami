@@ -17,63 +17,102 @@ class _ChapterDetailsScreenState extends State<ChapterDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Color mainColor;
+    Color dividerColor;
+    Color buttonsAndTextsColor;
+    Color background;
+
+    if (checkIfLiteORDark(context)) {
+      mainColor = MyThemeData.darkPrimaryColor;
+      buttonsAndTextsColor = mainColor;
+      dividerColor = mainColor;
+      background = mainColor;
+    } else {
+      mainColor = MyThemeData.lightPrimaryColor;
+      buttonsAndTextsColor = Colors.black;
+      dividerColor = mainColor;
+      background = Colors.white;
+    }
 
     var args = ModalRoute.of(context)?.settings.arguments as ChapterDetailsArgs;
 
     if (verses.isEmpty) {
       readChapterVerses(args.index);
     }
+
     return DefaultScreen(
         body: Scaffold(
             appBar: AppBar(
               title: Text(
                 args.name,
-                style: Theme.of(context).textTheme.titleMedium,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 32.0,
+                  color: buttonsAndTextsColor,
+                ),
               ),
             ),
-            body: Card(
-                margin: EdgeInsets.symmetric(vertical: 64, horizontal: 24),
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "سورة ${args.name}",
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
+            body: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Container(
+                width: double.maxFinite,
+                height: double.maxFinite,
+                child: Card(
+                    color: background,
+                    elevation: 8.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.0),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 16, horizontal: 48.0),
-                      child: Divider(
-                        thickness: 2.0,
-                        height: 1,
-                      ),
-                    ),
-                    Expanded(
-                      child: verses.isNotEmpty
-                          ? ListView.separated(
-                              itemBuilder: (context, index) {
-                                return VersesWidget(
-                                    numOfVerse: index, verse: verses[index]);
-                              },
-                              separatorBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    height: 1,
-                                    width: double.infinity,
-                                    color: MyThemeData.lightPrimaryColor,
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 64.0),
-                                  ),
-                                );
-                              },
-                              itemCount: verses.length)
-                          : Center(child: CircularProgressIndicator()),
-                    ),
-                  ],
-                ))));
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "سورة ${args.name}",
+                              style: TextStyle(
+                                  fontSize: 32.0, color: buttonsAndTextsColor),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.play_circle),
+                              color: buttonsAndTextsColor,
+                              padding: EdgeInsets.only(left: 32.0),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                          child: Container(
+                            width: double.maxFinite,
+                            height: 1.0,
+                            color: dividerColor,
+                          ),
+                        ),
+                        Expanded(
+                          child: verses.isNotEmpty
+                              ? ListView.separated(
+                                  itemBuilder: (context, index) {
+                                    return VersesWidget(
+                                        numOfVerse: index + 1,
+                                        verse: verses[index]);
+                                  },
+                                  separatorBuilder: (context, index) {
+                                    return Container(
+                                      height: 1,
+                                      width: double.maxFinite,
+                                      color: MyThemeData.lightPrimaryColor,
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal: 64.0),
+                                    );
+                                  },
+                                  itemCount: verses.length)
+                              : Center(child: CircularProgressIndicator()),
+                        ),
+                      ],
+                    )),
+              ),
+            )));
   }
 
   void readChapterVerses(int index) async {
@@ -84,6 +123,11 @@ class _ChapterDetailsScreenState extends State<ChapterDetailsScreen> {
       verses = lines;
     });
   }
+}
+
+bool checkIfLiteORDark(BuildContext context) {
+  var brightness = MediaQuery.of(context).platformBrightness;
+  return brightness == Brightness.dark;
 }
 
 class ChapterDetailsArgs {

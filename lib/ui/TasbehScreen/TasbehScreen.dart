@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:islami/ui/theme/MyThemeData.dart';
 import 'package:islami/ui/utils/HelpMethod.dart';
 
 class TasbehScreen extends StatefulWidget {
@@ -50,6 +51,7 @@ class _TasbehScreenState extends State<TasbehScreen> {
         height: double.maxFinite,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             GestureDetector(
               onTap: _incrementAndCounterRotationAngle,
@@ -64,7 +66,6 @@ class _TasbehScreenState extends State<TasbehScreen> {
                         padding: EdgeInsets.only(left: 45, top: 28),
                         child: Image.asset(
                           getFullImagePath("sebha_header.png"),
-                          color: Theme.of(context).colorScheme.secondary,
                         ),
                       ),
                       Padding(
@@ -75,8 +76,7 @@ class _TasbehScreenState extends State<TasbehScreen> {
                             alignment: Alignment.center,
                             child: Image.asset(
                               getFullImagePath("sebha.png"),
-                              color: Theme.of(context).colorScheme.secondary,
-                              height: 300,
+                              fit: BoxFit.fill,
                             ),
                           )),
                     ],
@@ -86,10 +86,7 @@ class _TasbehScreenState extends State<TasbehScreen> {
             ),
             Text(
               "عدد التسبيحات",
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
-            SizedBox(
-              height: 20.0,
+              style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w600),
             ),
             Container(
               width: 69.0,
@@ -97,28 +94,29 @@ class _TasbehScreenState extends State<TasbehScreen> {
               child: Center(
                 child: Text(
                   counter.toString(),
-                    style: Theme.of(context).textTheme.bodySmall),
-              ),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16.0),
-                  color: Theme.of(context).colorScheme.primary),
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            Container(
-              width: 150.0,
-              height: 50.0,
-              child: Center(
-                child: Text(
-                  tasbehat[tasbehIndex],
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 25.0,
+                  ),
                 ),
               ),
               decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16.0),
+                  color: MyThemeData.lightPrimaryColor),
+            ),
+            Container(
+              width: 150.0,
+              child: Text(
+                tasbehat[tasbehIndex],
+                style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 25.0,
+                    color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+              decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24.0),
-                  color: Theme.of(context).colorScheme.secondary),
+                  color: MyThemeData.lightPrimaryColor),
             ),
           ],
         ),

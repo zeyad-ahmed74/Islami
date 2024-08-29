@@ -8,13 +8,20 @@ class VersesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("$verse {${numOfVerse + 1}}");
-    return Text(
-      "$verse {${numOfVerse + 1}}",
-      style: Theme.of(context).textTheme.bodySmall,
-      locale: Locale("ar"),
-      textDirection: TextDirection.rtl,
-      textAlign: TextAlign.center,
+    return Row(
+      children: [
+        Expanded(
+          child: Text(
+            "$verse{$numOfVerse}",
+            style: TextStyle(
+              fontSize: .0,
+            ),
+            locale: Locale("ar"),
+            textDirection: TextDirection.rtl,
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ],
     );
   }
 }

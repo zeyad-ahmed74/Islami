@@ -22,7 +22,9 @@ class HadethTilteWidget extends StatelessWidget {
         children: [
           Text(
             title,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: TextStyle(
+              fontSize: 32.0,
+            ),
           ),
         ],
       ),
