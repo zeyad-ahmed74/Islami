@@ -30,6 +30,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  flutter_localizations:
+    sdk: flutter
+  intl: any # internationalization  i18n
+
   #  flutter_native_splash: ^2.4.1
 
 
@@ -53,6 +58,8 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+
+  generate: true # Add this line
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -110,3 +117,5 @@ flutter:
 #  android_12:
 #    image: assets/images/splash.jpg
 #    color: "#d4e4ed"
+flutter_intl:
+  enabled: true

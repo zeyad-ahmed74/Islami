@@ -6,6 +6,7 @@ import 'package:islami/ui/quran/QuranScreen.dart';
 import 'package:islami/ui/radio/RadioScreen.dart';
 import 'package:islami/ui/theme/MyThemeData.dart';
 import 'package:islami/ui/utils/DefaultScreen.dart';
+import 'package:islami/ui/utils/HelpMethod.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -31,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Scaffold(
         appBar: AppBar(
           title: Text(
-            "Islami",
+            appTranslations(context).appTitle,
             style: Theme.of(context).textTheme.titleMedium,
           ),
         ),
@@ -52,23 +53,23 @@ class _HomeScreenState extends State<HomeScreen> {
             items: [
               BottomNavBarItem(
                 iconName: "ic_quran.png",
-                iconLabel: "quran",
+                iconLabel: appTranslations(context).quranTab,
                 // we can replace this way with wrapping the widget with theme and set canvas color instead of setting background for every bottom nav bar item
                 // background: Theme.of(context).colorScheme.primary
               ),
               BottomNavBarItem(
                 iconName: "ic_hadeth.png",
-                iconLabel: "hadeth",
+                iconLabel: appTranslations(context).hadethTab,
                 // background: Theme.of(context).colorScheme.primary
               ),
               BottomNavBarItem(
                 iconName: "ic_sebha.png",
-                iconLabel: "sebha",
+                iconLabel: appTranslations(context).tasbehTab,
                 // background: Theme.of(context).colorScheme.primary
               ),
               BottomNavBarItem(
                 iconName: "ic_radio.png",
-                iconLabel: "radio",
+                iconLabel: appTranslations(context).radioTab,
                 // background: Theme.of(context).colorScheme.primary
               ),
             ],

@@ -60,7 +60,7 @@ class _HadethScreenState extends State<HadethScreen> {
                 : Center(
                     child: CircularProgressIndicator(),
                   ))
-          ],
+      ],
         )
     );
   }

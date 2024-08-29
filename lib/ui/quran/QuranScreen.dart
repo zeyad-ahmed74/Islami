@@ -38,14 +38,14 @@ class QuranScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            "Ayat",
+                            appTranslations(context).numOfAyat,
                             style: Theme.of(context).textTheme.titleSmall,
                             textAlign: TextAlign.center,
                           ),
                         ),
                         Expanded(
                           child: Text(
-                            "Chapter Name",
+                            appTranslations(context).chapterTitle,
                             style: Theme.of(context).textTheme.titleSmall,
                             textAlign: TextAlign.center,
                           ),

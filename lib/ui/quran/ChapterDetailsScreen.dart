@@ -23,7 +23,6 @@ class _ChapterDetailsScreenState extends State<ChapterDetailsScreen> {
     if (verses.isEmpty) {
       readChapterVerses(args.index);
     }
-
     return DefaultScreen(
         body: Scaffold(
             appBar: AppBar(

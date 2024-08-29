@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami/ui/hadeth/HadethDetailsScreen.dart';
 import 'package:islami/ui/home/HomeScreen.dart';
 import 'package:islami/ui/quran/ChapterDetailsScreen.dart';
@@ -16,6 +17,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Islami",
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: MyThemeData.lightTheme,
       darkTheme: MyThemeData.darkTheme,
       themeMode: ThemeMode.system,
@@ -26,6 +29,19 @@ class MyApp extends StatelessWidget {
         HadethDetailsScreen.routeName: (_) => HadethDetailsScreen(),
       },
       initialRoute: SplashScreen.routeName,
+
+      // localizationsDelegates: [
+      //   GlobalMaterialLocalizations.delegate,
+      //   GlobalWidgetsLocalizations.delegate,
+      //   GlobalCupertinoLocalizations.delegate,
+      // ],
+      //
+      // supportedLocales: [
+      //   Locale('en'), // English
+      //   Locale('ar'), // Arabic
+      // ],
+
+      locale: Locale('en'),
     );
   }
 }
