@@ -10,19 +10,20 @@ class QuranScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Locale currentLocal = Localizations.localeOf(context);
 
     return Scaffold(
       body: Expanded(
         child: Column(
           children: [
             Image.asset(getFullImagePath("quran_header_icn.png")),
-            SizedBox(
+            const SizedBox(
               height: 16.0,
             ),
             Expanded(
               child: Stack(children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
+                const Padding(
+                  padding: EdgeInsets.only(top: 8.0),
                   child: Center(
                     child: VerticalDivider(
                       thickness: 2.0,
@@ -31,7 +32,7 @@ class QuranScreen extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Divider(
+                    const Divider(
                       thickness: 2.0,
                     ),
                     Row(
@@ -52,25 +53,42 @@ class QuranScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 2.0,
                     ),
                     Expanded(
-                      child: ListView.separated(
-                          itemBuilder: (context, index) => ChapterTitleWidget(
-                                index: index,
-                                name: ChaptersNameAndVersesNumber
-                                    .chaptersName[index],
-                                numOfAyat: ChaptersNameAndVersesNumber
-                                    .versesNumber[index],
-                              ),
-                          separatorBuilder: (context, index) {
-                            return Divider(
-                              thickness: 2.0,
+                      child: currentLocal.toString() == "en"
+                          ? ListView.separated(
+                              itemBuilder: (context, index) => ChapterTitleWidget(
+                                    index: index,
+                                    name: ChaptersNameAndVersesNumber
+                                        .chaptersNameEnglish[index],
+                                    numOfAyat: ChaptersNameAndVersesNumber
+                                        .versesNumber[index],
+                                  ),
+                              separatorBuilder: (context, index) {
+                                return const Divider(
+                                  thickness: 2.0,
                             );
                           },
-                          itemCount:
-                              ChaptersNameAndVersesNumber.chaptersName.length),
+                          itemCount: ChaptersNameAndVersesNumber
+                                  .chaptersNameEnglish.length)
+                          : ListView.separated(
+                              itemBuilder: (context, index) =>
+                                  ChapterTitleWidget(
+                                    index: index,
+                                    name: ChaptersNameAndVersesNumber
+                                        .chaptersNameArabic[index],
+                                    numOfAyat: ChaptersNameAndVersesNumber
+                                        .versesNumber[index],
+                                  ),
+                              separatorBuilder: (context, index) {
+                                return const Divider(
+                                  thickness: 2.0,
+                                );
+                              },
+                              itemCount: ChaptersNameAndVersesNumber
+                                  .chaptersNameArabic.length),
                     ),
                   ],
                 ),

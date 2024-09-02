@@ -29,17 +29,17 @@ class _HadethScreenState extends State<HadethScreen> {
           getFullImagePath("hadith_header.png"),
           fit: BoxFit.fitWidth,
         ),
-        Divider(
+        const Divider(
           thickness: 2.0,
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "الأحاديث",
+            appTranslations(context).ahadeth,
             style: Theme.of(context).textTheme.titleSmall,
           ),
         ),
-        Divider(
+        const Divider(
           thickness: 2.0,
         ),
         Expanded(
@@ -57,7 +57,7 @@ class _HadethScreenState extends State<HadethScreen> {
                     },
                     itemCount: Ahadeth.length,
                   )
-                : Center(
+                : const Center(
                     child: CircularProgressIndicator(),
                   ))
       ],

@@ -17,7 +17,6 @@ class _ChapterDetailsScreenState extends State<ChapterDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     var args = ModalRoute.of(context)?.settings.arguments as ChapterDetailsArgs;
 
     if (verses.isEmpty) {
@@ -38,7 +37,7 @@ class _ChapterDetailsScreenState extends State<ChapterDetailsScreen> {
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        "سورة ${args.name}",
+                        args.name,
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
