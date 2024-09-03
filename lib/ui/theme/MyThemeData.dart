@@ -4,7 +4,7 @@ class MyThemeData {
   static const Color lightPrimaryColor = Color(0xFFB7935F);
   static const Color darkPrimaryColor = Color(0xFF141A2E);
   static const Color darkSecondaryColor = Color(0xFFFACC1D);
-  static bool isDark = false;
+  static bool isDark = true;
 
   static final ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: Colors.transparent,

@@ -40,18 +40,18 @@ class QuranScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            appTranslations(context).numOfAyat,
+                            appTranslations(context).chapterTitle,
                             style: Theme.of(context).textTheme.titleSmall,
                             textAlign: TextAlign.center,
                           ),
                         ),
                         Expanded(
                           child: Text(
-                            appTranslations(context).chapterTitle,
+                            appTranslations(context).numOfAyat,
                             style: Theme.of(context).textTheme.titleSmall,
                             textAlign: TextAlign.center,
                           ),
-                        ),
+                        )
                       ],
                     ),
                     Divider(
