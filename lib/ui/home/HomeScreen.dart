@@ -4,6 +4,7 @@ import 'package:islami/ui/hadeth/HadethScreen.dart';
 import 'package:islami/ui/home/BottomNavBarItem.dart';
 import 'package:islami/ui/quran/QuranScreen.dart';
 import 'package:islami/ui/radio/RadioScreen.dart';
+import 'package:islami/ui/settings/SettingsScreen.dart';
 import 'package:islami/ui/theme/MyThemeData.dart';
 import 'package:islami/ui/utils/DefaultScreen.dart';
 import 'package:islami/ui/utils/HelpMethod.dart';
@@ -24,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     HadethScreen(),
     TasbehScreen(),
     RadioScreen(),
+    SettingsScreen()
   ];
 
   @override
@@ -70,6 +72,11 @@ class _HomeScreenState extends State<HomeScreen> {
               BottomNavBarItem(
                 iconName: "ic_radio.png",
                 iconLabel: appTranslations(context).radioTab,
+                // background: Theme.of(context).colorScheme.primary
+              ),
+              BottomNavBarItem(
+                mainIcon: Icon(Icons.settings),
+                iconLabel: appTranslations(context).settingsTab,
                 // background: Theme.of(context).colorScheme.primary
               ),
             ],

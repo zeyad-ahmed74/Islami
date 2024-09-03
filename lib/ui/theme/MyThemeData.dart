@@ -21,9 +21,9 @@ class MyThemeData {
           TextStyle(fontFamily: 'Inter', fontSize: 25.0, color: Colors.black),
       bodySmall:
           TextStyle(fontFamily: 'Inter', fontSize: 20.0, color: Colors.black),
-      labelMedium: TextStyle(
-          fontFamily: 'Poppins', fontSize: 16.0, color: lightPrimaryColor),
-    ),
+        labelMedium: TextStyle(
+            fontFamily: 'Poppins', fontSize: 16.0, color: lightPrimaryColor),
+      ),
     iconTheme: IconThemeData(
       color: lightPrimaryColor,
     ),
@@ -61,7 +61,8 @@ class MyThemeData {
         secondary: lightPrimaryColor,
         onSecondary: Colors.black,
         surface: Colors.white),
-  );
+      bottomSheetTheme:
+          BottomSheetThemeData(backgroundColor: darkPrimaryColor));
 
   static final ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: Colors.transparent,
@@ -78,9 +79,9 @@ class MyThemeData {
           TextStyle(fontFamily: 'Inter', fontSize: 25.0, color: Colors.white),
       bodySmall:
           TextStyle(fontFamily: 'Inter', fontSize: 20.0, color: Colors.white),
-      labelMedium: TextStyle(
-          fontFamily: 'Poppins', fontSize: 16.0, color: darkSecondaryColor),
-    ),
+        labelMedium: TextStyle(
+            fontFamily: 'Poppins', fontSize: 16.0, color: darkSecondaryColor),
+      ),
     buttonTheme: ButtonThemeData(buttonColor: lightPrimaryColor),
     dividerTheme: DividerThemeData(color: darkSecondaryColor),
     cardTheme: CardTheme(
@@ -115,5 +116,6 @@ class MyThemeData {
         secondary: darkSecondaryColor,
         onSecondary: Colors.black,
         surface: Colors.white),
-  );
+      bottomSheetTheme:
+          BottomSheetThemeData(backgroundColor: lightPrimaryColor));
 }
