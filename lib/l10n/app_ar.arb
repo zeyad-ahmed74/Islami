@@ -4,8 +4,14 @@
   "hadethTab": "حديث",
   "tasbehTab": "تسبيح",
   "radioTab": "الإذاعة",
+  "settingsTab": "الإعدادات",
   "chapterTitle": "السورة",
   "numOfAyat": "الآيات",
-  "ahadeth": "الأحاديث"
-
+  "ahadeth": "الأحاديث",
+  "language": "اللغة",
+  "theme": "الوضع",
+  "light": "نهار",
+  "dark": "ليلي",
+  "arabic": "عربي",
+  "english": "إنجلش"
 }
