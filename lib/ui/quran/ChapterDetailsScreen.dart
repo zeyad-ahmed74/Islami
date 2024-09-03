@@ -38,7 +38,7 @@ class _ChapterDetailsScreenState extends State<ChapterDetailsScreen> {
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        "سورة ${args.name}",
+                        args.name,
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),

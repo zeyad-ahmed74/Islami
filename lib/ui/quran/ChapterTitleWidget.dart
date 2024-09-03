@@ -20,13 +20,13 @@ class ChapterTitleWidget extends StatelessWidget {
         children: [
           Expanded(
               child: Text(
-            numOfAyat.toString(),
+            name,
             style: Theme.of(context).textTheme.bodyMedium,
             textAlign: TextAlign.center,
           )),
           Expanded(
               child: Text(
-            name,
+            numOfAyat.toString(),
             style: Theme.of(context).textTheme.bodyMedium,
             textAlign: TextAlign.center,
           )),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami/ui/hadeth/HadethTilteWidget.dart';
+import 'package:islami/ui/utils/HadethsName.dart';
 import 'package:islami/ui/utils/HelpMethod.dart';
 
 class HadethScreen extends StatefulWidget {
@@ -20,7 +21,8 @@ class _HadethScreenState extends State<HadethScreen> {
   }
   @override
   Widget build(BuildContext context) {
-
+    Locale currentLocalization = Localizations.localeOf(context);
+    if (currentLocalization.toString() == "en") {}
     return Scaffold(
         body: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -35,7 +37,7 @@ class _HadethScreenState extends State<HadethScreen> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "الأحاديث",
+            appTranslations(context).ahadeth,
             style: Theme.of(context).textTheme.titleSmall,
           ),
         ),
@@ -47,7 +49,9 @@ class _HadethScreenState extends State<HadethScreen> {
                 ? ListView.separated(
                     itemBuilder: (context, index) {
                       return HadethTilteWidget(
-                          title: Ahadeth[index].title,
+                          title: currentLocalization.toString() == 'en'
+                              ? HadethsName.hadethsTitleInEnglish[index]
+                              : HadethsName.hadethsTitleInArabic[index],
                           body: Ahadeth[index].body);
                     },
                     separatorBuilder: (context, index) {
@@ -74,11 +78,11 @@ class _HadethScreenState extends State<HadethScreen> {
       String singleHadeth = ahadeth[i];
       List<String> lines = singleHadeth.trim().split("\n");
       String title = lines[0];
+      print(title);
       lines.removeAt(0);
       String hadethContent = lines.join("\n");
       Hadeth hadeth = Hadeth(title: title, body: hadethContent);
       Ahadeth.add(hadeth);
-      print(hadethContent);
     }
 
     setState(() {});

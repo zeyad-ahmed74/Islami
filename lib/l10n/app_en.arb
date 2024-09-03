@@ -5,5 +5,7 @@
  "tasbehTab": "Tasbeh",
  "radioTab": "Radio",
  "chapterTitle": "Chapter",
- "numOfAyat": "Num of Ayat"
+ "numOfAyat": "Ayat",
+ "ahadeth": "Ahadeth"
+
 }

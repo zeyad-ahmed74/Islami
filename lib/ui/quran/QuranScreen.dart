@@ -58,38 +58,24 @@ class QuranScreen extends StatelessWidget {
                       thickness: 2.0,
                     ),
                     Expanded(
-                        child: currentLocal.toString() == "en"
-                            ? ListView.separated(
-                                itemBuilder: (context, index) => ChapterTitleWidget(
+                        child: ListView.separated(
+                            itemBuilder: (context, index) => ChapterTitleWidget(
                                       index: index,
-                                      name: ChaptersNameAndVersesNumber
-                                          .chaptersNameInEnglish[index],
-                                      numOfAyat: ChaptersNameAndVersesNumber
-                                          .versesNumber[index],
-                                    ),
-                                separatorBuilder: (context, index) {
-                            return Divider(
-                              thickness: 2.0,
-                            );
-                          },
-                          itemCount: ChaptersNameAndVersesNumber
-                                    .chaptersNameInEnglish.length)
-                            : ListView.separated(
-                                itemBuilder: (context, index) =>
-                                    ChapterTitleWidget(
-                                      index: index,
-                                      name: ChaptersNameAndVersesNumber
+                                  name: currentLocal.toString() == "en"
+                                      ? ChaptersNameAndVersesNumber
+                                          .chaptersNameInEnglish[index]
+                                      : ChaptersNameAndVersesNumber
                                           .chaptersNameInArabic[index],
-                                      numOfAyat: ChaptersNameAndVersesNumber
+                                  numOfAyat: ChaptersNameAndVersesNumber
                                           .versesNumber[index],
                                     ),
                                 separatorBuilder: (context, index) {
-                                  return Divider(
-                                    thickness: 2.0,
-                                  );
-                                },
-                                itemCount: ChaptersNameAndVersesNumber
-                                    .chaptersNameInArabic.length)),
+                              return Divider(
+                                thickness: 2.0,
+                            );
+                            },
+                            itemCount: ChaptersNameAndVersesNumber
+                                .chaptersNameInArabic.length)),
                   ],
                 ),
               ]),
