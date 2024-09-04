@@ -60,7 +60,7 @@ class MyThemeData {
         onPrimary: Colors.white,
         secondary: lightPrimaryColor,
         onSecondary: Colors.black,
-        surface: Colors.white),
+          surface: Colors.white),
       bottomSheetTheme:
           BottomSheetThemeData(backgroundColor: darkPrimaryColor));
 
@@ -115,7 +115,7 @@ class MyThemeData {
         onPrimary: Colors.black,
         secondary: darkSecondaryColor,
         onSecondary: Colors.black,
-        surface: Colors.white),
+          surface: Colors.white),
       bottomSheetTheme:
           BottomSheetThemeData(backgroundColor: lightPrimaryColor));
 }
