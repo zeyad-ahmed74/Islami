@@ -35,6 +35,8 @@ dependencies:
     sdk: flutter
   intl: any # internationalization  i18n
 
+  provider: ^6.1.2
+
   #  flutter_native_splash: ^2.4.1
 
 

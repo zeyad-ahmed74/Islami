@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:islami/ui/theme/MyThemeData.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/ThemeProvider.dart';
 import 'HelpMethod.dart';
 
 class DefaultScreen extends StatelessWidget {
@@ -12,10 +13,12 @@ class DefaultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+
     return Stack(
       children: [
         Image.asset(
-          MyThemeData.isDark == false
+          themeProvider.themeMode == ThemeMode.light
               ? getFullImagePath("light_main_bg.png")
               : getFullImagePath("dark_main_bg.png"),
           fit: BoxFit.fill,

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:islami/ui/TasbehScreen/TasbehScreen.dart';
 import 'package:islami/ui/hadeth/HadethScreen.dart';
 import 'package:islami/ui/home/BottomNavBarItem.dart';
+import 'package:islami/ui/providers/ThemeProvider.dart';
 import 'package:islami/ui/quran/QuranScreen.dart';
 import 'package:islami/ui/radio/RadioScreen.dart';
 import 'package:islami/ui/settings/SettingsScreen.dart';
 import 'package:islami/ui/theme/MyThemeData.dart';
 import 'package:islami/ui/utils/DefaultScreen.dart';
 import 'package:islami/ui/utils/HelpMethod.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,6 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+
     return DefaultScreen(
       body: Scaffold(
         appBar: AppBar(
@@ -41,9 +45,9 @@ class _HomeScreenState extends State<HomeScreen> {
         bottomNavigationBar: Theme(
           // we wrapping bottom nav bar with Theme to set background for it .
           data: Theme.of(context).copyWith(
-            canvasColor: MyThemeData.isDark == true
-                ? MyThemeData.darkPrimaryColor
-                : MyThemeData.lightPrimaryColor,
+            canvasColor: themeProvider.themeMode == ThemeMode.light
+                ? MyThemeData.lightPrimaryColor
+                : MyThemeData.darkPrimaryColor,
           ),
           child: BottomNavigationBar(
             onTap: (index) {

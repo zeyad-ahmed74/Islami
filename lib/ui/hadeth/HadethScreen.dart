@@ -22,7 +22,7 @@ class _HadethScreenState extends State<HadethScreen> {
   @override
   Widget build(BuildContext context) {
     Locale currentLocalization = Localizations.localeOf(context);
-    if (currentLocalization.toString() == "en") {}
+
     return Scaffold(
         body: Column(
       mainAxisAlignment: MainAxisAlignment.center,

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:islami/ui/home/HomeScreen.dart';
-import 'package:islami/ui/theme/MyThemeData.dart';
+import 'package:islami/ui/providers/ThemeProvider.dart';
 import 'package:islami/ui/utils/HelpMethod.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -10,6 +11,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
 
     Future.delayed(Duration(seconds: 3), () {
       Navigator.pushReplacementNamed(context, HomeScreen.routeName);
@@ -18,9 +20,9 @@ class SplashScreen extends StatelessWidget {
     return Stack(
       children: [
         Image.asset(
-          MyThemeData.isDark == true
-              ? getFullImagePath("splash_dark_bg.png")
-              : getFullImagePath("splash_light_bg.png"),
+          themeProvider.themeMode == ThemeMode.light
+              ? getFullImagePath("splash_light_bg.png")
+              : getFullImagePath("splash_dark_bg.png"),
           width: double.maxFinite,
           height: double.maxFinite,
           fit: BoxFit.fill,
@@ -33,7 +35,7 @@ class SplashScreen extends StatelessWidget {
               child: Container(
                 width: double.maxFinite,
                 height: 300.0,
-                child: Image.asset(MyThemeData.isDark == false
+                child: Image.asset(themeProvider.themeMode == ThemeMode.light
                     ? getFullImagePath("light_splash_logo.png")
                     : getFullImagePath("dark_splash_logo.png")),
               ),
@@ -41,7 +43,7 @@ class SplashScreen extends StatelessWidget {
             Expanded(
                 flex: 2,
                 child: Image.asset(
-                  MyThemeData.isDark == false
+                  themeProvider.themeMode == ThemeMode.light
                       ? getFullImagePath("light_route_logo.png")
                       : getFullImagePath("dark_route_logo.png"),
                   color: Theme.of(context).colorScheme.secondary,

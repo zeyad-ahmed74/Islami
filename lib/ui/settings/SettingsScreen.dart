@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:islami/ui/providers/LanguageProvider.dart';
+import 'package:islami/ui/providers/ThemeProvider.dart';
 import 'package:islami/ui/settings/modalBottomSheetItem.dart';
+import 'package:islami/ui/theme/MyThemeData.dart';
 import 'package:islami/ui/utils/HelpMethod.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -10,11 +14,12 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  String selectedLanguage = "arabic";
-  String selectedMode = "light";
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+    LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
+
     return Container(
       padding: EdgeInsets.all(16.0),
       width: double.maxFinite,
@@ -34,24 +39,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           InkWell(
             onTap: () {
-              _showLanguageModalButtonSheet(context);
+              _showLanguageModalButtonSheet(context, languageProvider);
             },
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 24.0),
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               width: double.maxFinite,
               child: Text(
-                selectedLanguage,
+                isArabic(languageProvider)
+                    ? appTranslations(context).arabic
+                    : appTranslations(context).english,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Theme.of(context).colorScheme.secondary,
                     ),
               ),
               decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary,
+                  color: isLight(themeProvider)
+                      ? Colors.white
+                      : MyThemeData.darkPrimaryColor,
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(16.0),
                   border: Border.all(
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: isLight(themeProvider)
+                          ? MyThemeData.lightPrimaryColor
+                          : MyThemeData.darkSecondaryColor,
                       width: 2.0)),
             ),
           ),
@@ -67,24 +78,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           InkWell(
             onTap: () {
-              _showModeModalButtonSheet(context);
+              _showThemeModalButtonSheet(context, themeProvider);
             },
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 24.0),
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               width: double.maxFinite,
               child: Text(
-                selectedMode,
+                isLight(themeProvider)
+                    ? appTranslations(context).light
+                    : appTranslations(context).dark,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Theme.of(context).colorScheme.secondary,
                     ),
               ),
               decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary,
+                  color: isLight(themeProvider)
+                      ? Colors.white
+                      : MyThemeData.darkPrimaryColor,
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(16.0),
                   border: Border.all(
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: isLight(themeProvider)
+                          ? MyThemeData.lightPrimaryColor
+                          : MyThemeData.darkSecondaryColor,
                       width: 2.0)),
             ),
           ),
@@ -93,7 +110,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  void _showLanguageModalButtonSheet(BuildContext context) {
+  void _showLanguageModalButtonSheet(
+      BuildContext context, LanguageProvider languageProvider) {
     showModalBottomSheet(
         context: context,
         builder: (context) {
@@ -107,27 +125,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     text: appTranslations(context).english,
                     onBottomSheetItemClicked: (option) {
                       setState(() {
-                        selectedLanguage = appTranslations(context).english;
+                        languageProvider.changeLanguage('en');
                         Navigator.pop(context);
                       });
                     },
-                    clickedOrNot:
-                        selectedLanguage == appTranslations(context).english
-                            ? true
-                            : false,
                   ),
                   ModalBottomSheetItem(
                     text: appTranslations(context).arabic,
                     onBottomSheetItemClicked: (option) {
                       setState(() {
-                        selectedLanguage = appTranslations(context).arabic;
+                        languageProvider.changeLanguage('ar');
                         Navigator.pop(context);
                       });
                     },
-                    clickedOrNot:
-                        selectedLanguage == appTranslations(context).arabic
-                            ? true
-                            : false,
+                    // clickedOrNot: selectedLanguage == appTranslations(context).arabic ? true : false,
                   )
                 ],
               ),
@@ -136,7 +147,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         });
   }
 
-  void _showModeModalButtonSheet(BuildContext context) {
+  void _showThemeModalButtonSheet(
+      BuildContext context, ThemeProvider themeProvider) {
     showModalBottomSheet(
         context: context,
         builder: (context) {
@@ -150,32 +162,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     text: appTranslations(context).light,
                     onBottomSheetItemClicked: (option) {
                       setState(() {
-                        selectedMode = appTranslations(context).light;
+                        themeProvider.changeThemeMode(ThemeMode.light);
                         Navigator.pop(context);
                       });
                     },
-                    clickedOrNot:
-                        selectedLanguage == appTranslations(context).light
-                            ? true
-                            : false,
                   ),
                   ModalBottomSheetItem(
                     text: appTranslations(context).dark,
                     onBottomSheetItemClicked: (option) {
                       setState(() {
-                        selectedMode = appTranslations(context).dark;
+                        themeProvider.changeThemeMode(ThemeMode.dark);
                         Navigator.pop(context);
                       });
                     },
-                    clickedOrNot:
-                        selectedLanguage == appTranslations(context).dark
-                            ? true
-                            : false,
                   )
                 ],
               ),
             ),
           );
         });
+  }
+
+  bool isLight(ThemeProvider themeProvider) {
+    return themeProvider.themeMode == ThemeMode.light;
+  }
+
+  bool isArabic(LanguageProvider languageProvider) {
+    return languageProvider.localCode == "ar";
   }
 }
