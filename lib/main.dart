@@ -8,20 +8,16 @@ import 'package:islami/ui/quran/ChapterDetailsScreen.dart';
 import 'package:islami/ui/splash/SplashScreen.dart';
 import 'package:islami/ui/theme/MyThemeData.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(
-        create: (context) {
-          return ThemeProvider();
-        },
-      ),
-      ChangeNotifierProvider(
-        create: (context) {
-          return LanguageProvider();
-        },
-      ),
+      ChangeNotifierProvider(create: (_) => ThemeProvider(prefs)),
+      ChangeNotifierProvider(create: (_) => LanguageProvider(prefs)),
     ],
     child: const MyApp(),
   ));
@@ -32,8 +28,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
-    LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
+    ThemeProvider themeProvider = ThemeProvider.get(context);
+    LanguageProvider languageProvider = LanguageProvider.get(context);
 
     return MaterialApp(
       title: "Islami",

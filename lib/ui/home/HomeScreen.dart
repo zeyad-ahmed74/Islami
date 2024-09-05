@@ -9,7 +9,6 @@ import 'package:islami/ui/settings/SettingsScreen.dart';
 import 'package:islami/ui/theme/MyThemeData.dart';
 import 'package:islami/ui/utils/DefaultScreen.dart';
 import 'package:islami/ui/utils/HelpMethod.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -32,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeProvider themeProvider = ThemeProvider.get(context);
 
     return DefaultScreen(
       body: Scaffold(

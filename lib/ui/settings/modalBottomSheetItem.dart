@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:islami/ui/providers/ThemeProvider.dart';
 import 'package:islami/ui/theme/MyThemeData.dart';
-import 'package:provider/provider.dart';
 
 typedef OnBottomSheetItemClicked = void Function(String option)?;
 
@@ -18,7 +17,7 @@ class ModalBottomSheetItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeProvider themeProvider = ThemeProvider.get(context);
     var isDark = themeProvider.isDark();
 
     return InkWell(
