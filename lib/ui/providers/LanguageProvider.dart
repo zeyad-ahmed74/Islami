@@ -7,4 +7,8 @@ class LanguageProvider extends ChangeNotifier {
     this.localCode = localCode;
     notifyListeners();
   }
+
+  bool isEnglish() {
+    return localCode == "en";
+  }
 }

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:islami/ui/providers/ThemeProvider.dart';
+import 'package:islami/ui/theme/MyThemeData.dart';
+import 'package:provider/provider.dart';
 
 typedef OnBottomSheetItemClicked = void Function(String option)?;
 
@@ -15,6 +18,9 @@ class ModalBottomSheetItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+    var isDark = themeProvider.isDark();
+
     return InkWell(
       onTap: () {
         onBottomSheetItemClicked?.call(text);
@@ -36,15 +42,20 @@ class ModalBottomSheetItem extends StatelessWidget {
               visible: clickedOrNot,
               child: Icon(
                 Icons.check,
-                color: Theme.of(context).colorScheme.secondary,
+                color: isDark
+                    ? MyThemeData.darkSecondaryColor
+                    : MyThemeData.lightPrimaryColor,
               ),
             )
           ],
         ),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16.0),
-            border: Border.all(color: Theme.of(context).colorScheme.secondary),
-            color: Theme.of(context).colorScheme.primary),
+            border: Border.all(
+                color: isDark
+                    ? MyThemeData.darkSecondaryColor
+                    : MyThemeData.lightPrimaryColor),
+            color: isDark ? MyThemeData.darkPrimaryColor : Colors.white),
       ),
     );
   }

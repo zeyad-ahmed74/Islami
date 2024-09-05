@@ -79,7 +79,6 @@ class _ChapterDetailsScreenState extends State<ChapterDetailsScreen> {
   void readChapterVerses(int index) async {
     String sura = await rootBundle.loadString(getFullFilePath(index));
     List<String> lines = sura.trim().split("\n");
-    print(lines);
     setState(() {
       verses = lines;
     });

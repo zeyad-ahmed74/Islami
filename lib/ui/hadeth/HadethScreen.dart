@@ -78,7 +78,6 @@ class _HadethScreenState extends State<HadethScreen> {
       String singleHadeth = ahadeth[i];
       List<String> lines = singleHadeth.trim().split("\n");
       String title = lines[0];
-      print(title);
       lines.removeAt(0);
       String hadethContent = lines.join("\n");
       Hadeth hadeth = Hadeth(title: title, body: hadethContent);

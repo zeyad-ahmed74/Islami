@@ -61,8 +61,7 @@ class MyThemeData {
         secondary: lightPrimaryColor,
         onSecondary: Colors.black,
           surface: Colors.white),
-      bottomSheetTheme:
-          BottomSheetThemeData(backgroundColor: darkPrimaryColor));
+      bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.white));
 
   static final ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: Colors.transparent,
@@ -117,5 +116,5 @@ class MyThemeData {
         onSecondary: Colors.black,
           surface: Colors.white),
       bottomSheetTheme:
-          BottomSheetThemeData(backgroundColor: lightPrimaryColor));
+          BottomSheetThemeData(backgroundColor: darkPrimaryColor));
 }

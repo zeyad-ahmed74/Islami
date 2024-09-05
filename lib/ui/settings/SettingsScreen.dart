@@ -19,6 +19,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
     LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
+    var isDark = themeProvider.isDark();
+    var isEnglish = languageProvider.isEnglish();
 
     return Container(
       padding: EdgeInsets.all(16.0),
@@ -39,30 +41,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           InkWell(
             onTap: () {
-              _showLanguageModalButtonSheet(context, languageProvider);
+              _showLanguageModalButtonSheet(
+                  context, languageProvider, isEnglish);
             },
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 24.0),
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               width: double.maxFinite,
               child: Text(
-                isArabic(languageProvider)
-                    ? appTranslations(context).arabic
-                    : appTranslations(context).english,
+                isEnglish
+                    ? appTranslations(context).english
+                    : appTranslations(context).arabic,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Theme.of(context).colorScheme.secondary,
                     ),
               ),
               decoration: BoxDecoration(
-                  color: isLight(themeProvider)
-                      ? Colors.white
-                      : MyThemeData.darkPrimaryColor,
+                  color: isDark ? MyThemeData.darkPrimaryColor : Colors.white,
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(16.0),
                   border: Border.all(
-                      color: isLight(themeProvider)
-                          ? MyThemeData.lightPrimaryColor
-                          : MyThemeData.darkSecondaryColor,
+                      color: isDark
+                          ? MyThemeData.darkSecondaryColor
+                          : MyThemeData.lightPrimaryColor,
                       width: 2.0)),
             ),
           ),
@@ -78,30 +79,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           InkWell(
             onTap: () {
-              _showThemeModalButtonSheet(context, themeProvider);
+              _showThemeModalButtonSheet(context, themeProvider, isDark);
             },
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 24.0),
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               width: double.maxFinite,
               child: Text(
-                isLight(themeProvider)
-                    ? appTranslations(context).light
-                    : appTranslations(context).dark,
+                isDark
+                    ? appTranslations(context).dark
+                    : appTranslations(context).light,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Theme.of(context).colorScheme.secondary,
                     ),
               ),
               decoration: BoxDecoration(
-                  color: isLight(themeProvider)
-                      ? Colors.white
-                      : MyThemeData.darkPrimaryColor,
+                  color: isDark ? MyThemeData.darkPrimaryColor : Colors.white,
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(16.0),
                   border: Border.all(
-                      color: isLight(themeProvider)
-                          ? MyThemeData.lightPrimaryColor
-                          : MyThemeData.darkSecondaryColor,
+                      color: isDark
+                          ? MyThemeData.darkSecondaryColor
+                          : MyThemeData.lightPrimaryColor,
                       width: 2.0)),
             ),
           ),
@@ -110,8 +109,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  void _showLanguageModalButtonSheet(
-      BuildContext context, LanguageProvider languageProvider) {
+  void _showLanguageModalButtonSheet(BuildContext context,
+      LanguageProvider languageProvider, bool isEnglish) {
     showModalBottomSheet(
         context: context,
         builder: (context) {
@@ -129,6 +128,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Navigator.pop(context);
                       });
                     },
+                    clickedOrNot: isEnglish ? true : false,
                   ),
                   ModalBottomSheetItem(
                     text: appTranslations(context).arabic,
@@ -138,7 +138,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Navigator.pop(context);
                       });
                     },
-                    // clickedOrNot: selectedLanguage == appTranslations(context).arabic ? true : false,
+                    clickedOrNot: isEnglish ? false : true,
                   )
                 ],
               ),
@@ -147,8 +147,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         });
   }
 
-  void _showThemeModalButtonSheet(
-      BuildContext context, ThemeProvider themeProvider) {
+  void _showThemeModalButtonSheet(BuildContext context,
+      ThemeProvider themeProvider, bool isDark) {
     showModalBottomSheet(
         context: context,
         builder: (context) {
@@ -166,6 +166,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Navigator.pop(context);
                       });
                     },
+                    clickedOrNot: isDark ? false : true,
                   ),
                   ModalBottomSheetItem(
                     text: appTranslations(context).dark,
@@ -175,6 +176,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Navigator.pop(context);
                       });
                     },
+                    clickedOrNot: isDark ? true : false,
                   )
                 ],
               ),
@@ -183,11 +185,4 @@ class _SettingsScreenState extends State<SettingsScreen> {
         });
   }
 
-  bool isLight(ThemeProvider themeProvider) {
-    return themeProvider.themeMode == ThemeMode.light;
-  }
-
-  bool isArabic(LanguageProvider languageProvider) {
-    return languageProvider.localCode == "ar";
-  }
 }
