@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:islami/ui/home/HomeScreen.dart';
 import 'package:islami/ui/providers/ThemeProvider.dart';
 import 'package:islami/ui/utils/HelpMethod.dart';
-import 'package:provider/provider.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -11,7 +10,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeProvider themeProvider = ThemeProvider.get(context);
 
     Future.delayed(Duration(seconds: 3), () {
       Navigator.pushReplacementNamed(context, HomeScreen.routeName);

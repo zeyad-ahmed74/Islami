@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../providers/ThemeProvider.dart';
 import 'HelpMethod.dart';
@@ -13,7 +12,7 @@ class DefaultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeProvider themeProvider = ThemeProvider.get(context);
 
     return Stack(
       children: [

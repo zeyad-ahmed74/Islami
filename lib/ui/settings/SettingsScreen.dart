@@ -4,7 +4,6 @@ import 'package:islami/ui/providers/ThemeProvider.dart';
 import 'package:islami/ui/settings/modalBottomSheetItem.dart';
 import 'package:islami/ui/theme/MyThemeData.dart';
 import 'package:islami/ui/utils/HelpMethod.dart';
-import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -17,8 +16,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
-    LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
+    ThemeProvider themeProvider = ThemeProvider.get(context);
+    LanguageProvider languageProvider = LanguageProvider.get(context);
     var isDark = themeProvider.isDark();
     var isEnglish = languageProvider.isEnglish();
 
